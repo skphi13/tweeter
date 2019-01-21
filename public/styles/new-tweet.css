@@ -22,4 +22,18 @@ section.new-tweet {
     margin-top: 2px;
   }
   
+  section span.counter:hover {
+    cursor: default;
+  }
   
+  section.new-tweet h2:hover {
+    cursor: default;
+  }
+  
+  section.new-tweet input {
+    cursor: pointer;
+  }
+  /* red err */
+  .err {
+    color: red;
+  }
