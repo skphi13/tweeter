@@ -113,7 +113,7 @@ $(function () {
       if (textContent === 0) {
         $('#emptyError').slideDown();
       } else if ( textContent > 140 ) {
-        $('fullError').slideDown();
+        $('#fullError').slideDown();
       } else {
         $.ajax({
         url: "/tweets/",
