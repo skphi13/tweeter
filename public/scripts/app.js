@@ -77,8 +77,6 @@ function renderTweets(tweets) {
     tweets.forEach(function(tweet) {
       let $tweet = createTweetElement(tweet);
       $('.tweets-container').prepend($tweet);
-      let $tweet2 = createTweetElement(tweet);
-      $('.tweets-container').prepend($tweet2);
     });
 }
 // create the tweet
@@ -96,6 +94,7 @@ function createTweetElement(tweet) {
     let footer = $('<footer>').append('<span>').text("Created " + createDate(tweet.created_at) + " ago").append(icons);
     let $tweet = $('<article>').addClass('tweet').append(header).append(div).append(footer);
     return $tweet;
+    console.log($tweet);
 }
 
 //hiding errors
@@ -155,6 +154,7 @@ function loadTweets() {
 }
 // renderTweets(data);
 loadTweets();
+
 });
 
 
