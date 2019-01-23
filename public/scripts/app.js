@@ -74,6 +74,7 @@ function createDate(date) {
 
 //rendering the tweet
 function renderTweets(tweets) {
+    $(".tweet").remove(0);
     tweets.forEach(function(tweet) {
       let $tweet = createTweetElement(tweet);
       $('.tweets-container').prepend($tweet);
@@ -115,18 +116,13 @@ $(function () {
       } else if ( textContent > 140 ) {
         $('#fullError').slideDown();
       } else {
-        $.ajax({
-        url: "/tweets/",
-        type: "POST",
-        data: tweetData,
-        success: function(newTweets) {
-          console.log('Success: ', newTweets);
-          loadTweets();
-          }
-        });
+        $.post("/tweets/", tweetData)
+        .then(tweets => {
+          loadTweets(tweets);
+          });
       }
     });
-});
+  })
 
 //compose button toggle
 $('.container .new-tweet').hide();
@@ -142,14 +138,10 @@ $('.compose-button').click(function() {
 // loading tweets back
 function loadTweets() {
   $(function () {
-    $.ajax({
-      url: "/tweets/",
-      type: "GET",
-      success: function (tweets) {
-        console.log("Is it working", tweets)
-        renderTweets(tweets);
-      }
-    });
+    $.get("/tweets/")
+    .then(tweets => {
+      renderTweets(tweets);
+    })
   });
 }
 // renderTweets(data);
