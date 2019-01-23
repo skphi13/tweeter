@@ -10,6 +10,7 @@ section.new-tweet {
     width: 100%;
     color: black;
     padding: 5px;
+    height: 100px;
   }
   
   section span.counter {
@@ -22,6 +23,16 @@ section.new-tweet {
     margin-top: 2px;
   }
   
+  section #emptyError {
+    margin-left: 100px;
+    color: red;
+  }
+
+  section #fullError {
+    margin-left: 100px;
+    color: red;
+  }
+
   section span.counter:hover {
     cursor: default;
   }

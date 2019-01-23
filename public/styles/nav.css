@@ -22,3 +22,25 @@
     float: left;
     padding-left: 10px;
   }
+
+  #nav-bar button {
+    float: right;
+    top: 12%;
+    height: 75%;
+    border-radius: 15px;
+    border: 2px solid #000000;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 20px 18px;
+    background-color: #e8fdff;
+    color: #00a087;
+    opacity: .80;
+    position: relative;
+  }
+
+  #nav-bar button:hover {
+    background-color: #ffffff;
+    position: relative;
+    top: 5px;
+    opacity: 1;
+  }

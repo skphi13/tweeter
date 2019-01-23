@@ -79,9 +79,7 @@ function createDate(date) {
 };
 
 function renderTweets(tweets) {
-  // loops through tweets
-    // calls createTweetElement for each tweet
-    // takes return value and appends it to the tweets container
+  console.log("these are the tweets", tweets)
     tweets.forEach(function(tweet) {
         let $tweet = createTweetElement(tweet);
         $('.tweets-container').prepend($tweet);
@@ -89,38 +87,74 @@ function renderTweets(tweets) {
 }
 
 function createTweetElement(tweet) {
-    console.log(tweet);
+    // console.log(tweet);
     // let date = new Date(tweet.created_at).toString().slice(0, 15);
     let imgUrl = $('<img>').attr("src", tweet.user.avatars.large);
     let h1 = $('<h1>').text(tweet.user.name);
     let span = $('<span>').text(tweet.user.handle);
     let header = $('<header>').append(imgUrl).append(h1).append(span);
     let div = $('<div>').text(tweet.content.text);
-    let footer = $('<footer>').append('<span>').text("Created " + createDate(tweet.created_at));
+    let footer = $('<footer>').append('<span>').text("Created " + createDate(tweet.created_at) + " ago");
     let $tweet = $('<article>').addClass('tweet').append(header).append(div).append(footer);
-    
-  // ...
-  return $tweet;
+    return $tweet;
 }
 
+$('#emptyError').hide();
+$('#fullError').hide();
+
+
+// preventdefault from submit form, post ajax
 $(function () {
-  let $post = $('form input');
-  $post.click(function() {
+  let tweetPost = $('form input');
+  tweetPost.click(function() {
     let tweetData = $('form').serialize();
+    let textContent = $('textarea#tweetInput').val().length;
     event.preventDefault();
+    $('#emptyError').slideUp();
+    $('#fullError').slideUp();
     console.log("submit buttom click");
+    if (textContent === 0) {
+      $('#emptyError').slideDown();
+    } else if ( textContent > 140 ) {
+      $('fullError').slideDown();
+    } else {
     $.ajax({
       url: "/tweets/",
       type: "POST",
       data: tweetData,
       success: function(newTweets) {
       console.log('Success: ', newTweets);
+      loadTweets();
       }
     });
+  }
   });
 });
 
-renderTweets(data);
+$('.compose-button').click(function() {
+  $(this).toggleClass('higlight');
+  $('html, body').animate({
+    scrollTop: '0px'
+  }, 300);
+  $('.container .new-tweet').slideToggle();
+  $('.container textarea').select();
+})
+
+// loading tweets back
+function loadTweets() {
+  $(function () {
+    $.ajax({
+      url: "/tweets/",
+      type: "GET",
+      success: function (tweets) {
+        console.log("Is it working", tweets)
+        renderTweets(tweets);
+      }
+    });
+  });
+}
+// renderTweets(data);
+loadTweets();
 });
 
 
