@@ -7,7 +7,7 @@ This repository is the starter code for the project: Students will fork and clon
 ## Final Product
 !["Screenshot of tweeter page"](https://github.com/skphi13/tweeter/blob/master/docs/Screen%20Shot%202019-01-23%20at%205.03.49%20PM.png)
 
-!["Screenshot of tweeter with inputarea page"](https://github.com/skphi13/Tinyapp/blob/master/docs/register-page.png)
+!["Screenshot of tweeter with inputarea page"](https://github.com/skphi13/tweeter/blob/master/docs/Screen%20Shot%202019-01-23%20at%205.04.04%20PM.png)
 
 
 ## Getting Started
