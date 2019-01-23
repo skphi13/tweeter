@@ -13,7 +13,8 @@ section.tweets-container {
 
     section.tweets-container article:hover {
         opacity: 1;
-        border-color: darkgrey; }
+        border-color: darkgrey; 
+        }
     
    section.tweets-container article header {
         background-color: #eee;
@@ -27,14 +28,14 @@ section.tweets-container {
         border-radius: 10px;
         margin: 5px; }
 
-    section.tweets-container article header > h1 {
+    section.tweets-container article header h1 {
         display: inline;
         position: relative;
         bottom: 25px;
         padding-left: 5px;
         font-size: 26px; }
 
-    section.tweets-container article header > span {
+    section.tweets-container article header span {
         font-size: 15px;
         color: #787878;
         float: right;
@@ -42,7 +43,7 @@ section.tweets-container {
         top: 10px; }
 
     section.tweets-container article div {
-        height: 120px;
+        /* height: 120px; */
         font-size: 26px;
         padding: 5px; }
 
@@ -50,4 +51,25 @@ section.tweets-container {
         border-top: 1px solid #D0D0D0;
         padding-top: 10px; 
         padding-left: 10px;
+    }
+
+    section.tweets-container article footer div {
+        float: right;
+        padding-top: 0px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        position: relative;
+        top: -10px;
+        display: none;
+        cursor: pointer;
+    }
+
+    i.fas {
+        font-weight: 800;
+        padding: 5px;
+    }
+
+    section.tweets-container article:hover .icons {
+        display: flex;
+        cursor: pointer;
     }

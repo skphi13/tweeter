@@ -1,9 +1,3 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
-// Fake data taken from tweets.json
 $(document).ready(function() {
 const data = [
   {
@@ -78,30 +72,35 @@ function createDate(date) {
   return Math.floor(seconds) + " seconds";
 };
 
+//rendering the tweet
 function renderTweets(tweets) {
-  console.log("these are the tweets", tweets)
     tweets.forEach(function(tweet) {
-        let $tweet = createTweetElement(tweet);
-        $('.tweets-container').prepend($tweet);
+      let $tweet = createTweetElement(tweet);
+      $('.tweets-container').prepend($tweet);
+      let $tweet2 = createTweetElement(tweet);
+      $('.tweets-container').prepend($tweet2);
     });
 }
-
+// create the tweet
 function createTweetElement(tweet) {
-    // console.log(tweet);
-    // let date = new Date(tweet.created_at).toString().slice(0, 15);
     let imgUrl = $('<img>').attr("src", tweet.user.avatars.large);
     let h1 = $('<h1>').text(tweet.user.name);
     let span = $('<span>').text(tweet.user.handle);
     let header = $('<header>').append(imgUrl).append(h1).append(span);
     let div = $('<div>').text(tweet.content.text);
-    let footer = $('<footer>').append('<span>').text("Created " + createDate(tweet.created_at) + " ago");
+    let divIcon = $('<div>').addClass('icons');
+    let flagIcon = $('<i>').addClass('fas fa-flag');
+    let retweetIcon = $('<i>').addClass('fas fa-retweet');
+    let heartIcon = $('<i>').addClass('fas fa-heart');
+    let icons = divIcon.append(flagIcon).append(retweetIcon).append(heartIcon);
+    let footer = $('<footer>').append('<span>').text("Created " + createDate(tweet.created_at) + " ago").append(icons);
     let $tweet = $('<article>').addClass('tweet').append(header).append(div).append(footer);
     return $tweet;
 }
 
+//hiding errors
 $('#emptyError').hide();
 $('#fullError').hide();
-
 
 // preventdefault from submit form, post ajax
 $(function () {
@@ -112,25 +111,26 @@ $(function () {
     event.preventDefault();
     $('#emptyError').slideUp();
     $('#fullError').slideUp();
-    console.log("submit buttom click");
-    if (textContent === 0) {
-      $('#emptyError').slideDown();
-    } else if ( textContent > 140 ) {
-      $('fullError').slideDown();
-    } else {
-    $.ajax({
-      url: "/tweets/",
-      type: "POST",
-      data: tweetData,
-      success: function(newTweets) {
-      console.log('Success: ', newTweets);
-      loadTweets();
+      if (textContent === 0) {
+        $('#emptyError').slideDown();
+      } else if ( textContent > 140 ) {
+        $('fullError').slideDown();
+      } else {
+        $.ajax({
+        url: "/tweets/",
+        type: "POST",
+        data: tweetData,
+        success: function(newTweets) {
+          console.log('Success: ', newTweets);
+          loadTweets();
+          }
+        });
       }
     });
-  }
-  });
 });
 
+//compose button toggle
+$('.container .new-tweet').hide();
 $('.compose-button').click(function() {
   $(this).toggleClass('higlight');
   $('html, body').animate({
