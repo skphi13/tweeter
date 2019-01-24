@@ -119,6 +119,7 @@ $(function () {
         $.post("/tweets/", tweetData)
         .then(tweets => {
           loadTweets(tweets);
+          $('.new-tweet').find('textarea').val('');
           });
       }
     });
@@ -141,6 +142,7 @@ function loadTweets() {
     $.get("/tweets/")
     .then(tweets => {
       renderTweets(tweets);
+      $('.counter').text(140);
     })
   });
 }
